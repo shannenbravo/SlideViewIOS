@@ -17,6 +17,24 @@ class ViewController: UIViewController {
         return image
     }()
     
+    private let prevButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Prev", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
+        return button
+    }()
+    
+    private let nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Next", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
+        return button
+    }()
+    
     let descriptionTextView: UITextView = {
         let textview = UITextView()
         let attributedText = NSMutableAttributedString(string: "Steve Jobs", attributes: [NSAttributedStringKey.font:UIFont.boldSystemFont(ofSize: 20)])
@@ -28,14 +46,39 @@ class ViewController: UIViewController {
         
     }()
     
-    
+    private let pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.numberOfPages = 4
+        pc.currentPageIndicatorTintColor = .red
+        pc.pageIndicatorTintColor = .gray
+//        pc.translatesAutoresizingMaskIntoConstraints = false
+        return pc
+        
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(descriptionTextView)
         appleImage.mainImageConstraints(view: view, mainInmageView: appleImage )
         descriptionTextView.setConstraintsForFounders(view: view, mainImageView: appleImage)
+        setupButtomControls()
       
+    }
+    
+    fileprivate func setupButtomControls() {
+//        view.addSubview(prevButton)
+//        prevButton.backgroundColor = .red
+        let bottomControls = UIStackView(arrangedSubviews: [prevButton,pageControl,nextButton])
+        bottomControls.translatesAutoresizingMaskIntoConstraints = false
+        bottomControls.distribution = .fillEqually
+        view.addSubview(bottomControls)
+        bottomControls.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        bottomControls.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        bottomControls.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        bottomControls.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        
     }
 
 
