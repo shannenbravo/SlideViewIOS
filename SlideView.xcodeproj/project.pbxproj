@@ -14,6 +14,8 @@
 		D5A0F14B20ADA2310005CA70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5A0F14920ADA2310005CA70 /* LaunchScreen.storyboard */; };
 		D5A0F15620ADA2310005CA70 /* SlideViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A0F15520ADA2310005CA70 /* SlideViewTests.swift */; };
 		D5A0F16120ADA2310005CA70 /* SlideViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A0F16020ADA2310005CA70 /* SlideViewUITests.swift */; };
+		D5A0F16F20ADD0D40005CA70 /* SwipingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A0F16E20ADD0D40005CA70 /* SwipingController.swift */; };
+		D5A0F17120ADDC470005CA70 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A0F17020ADDC470005CA70 /* PageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		D5A0F15C20ADA2310005CA70 /* SlideViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlideViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A0F16020ADA2310005CA70 /* SlideViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideViewUITests.swift; sourceTree = "<group>"; };
 		D5A0F16220ADA2310005CA70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5A0F16E20ADD0D40005CA70 /* SwipingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingController.swift; sourceTree = "<group>"; };
+		D5A0F17020ADDC470005CA70 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +102,13 @@
 			isa = PBXGroup;
 			children = (
 				D5A0F14020ADA2300005CA70 /* AppDelegate.swift */,
+				D5A0F16E20ADD0D40005CA70 /* SwipingController.swift */,
 				D5A0F14220ADA2300005CA70 /* ViewController.swift */,
-				D5A0F14420ADA2300005CA70 /* Main.storyboard */,
 				D5A0F14720ADA2310005CA70 /* Assets.xcassets */,
 				D5A0F14920ADA2310005CA70 /* LaunchScreen.storyboard */,
+				D5A0F14420ADA2300005CA70 /* Main.storyboard */,
 				D5A0F14C20ADA2310005CA70 /* Info.plist */,
+				D5A0F17020ADDC470005CA70 /* PageCell.swift */,
 			);
 			path = SlideView;
 			sourceTree = "<group>";
@@ -257,6 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5A0F14320ADA2300005CA70 /* ViewController.swift in Sources */,
+				D5A0F16F20ADD0D40005CA70 /* SwipingController.swift in Sources */,
+				D5A0F17120ADDC470005CA70 /* PageCell.swift in Sources */,
 				D5A0F14120ADA2300005CA70 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
