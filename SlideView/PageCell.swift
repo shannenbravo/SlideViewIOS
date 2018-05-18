@@ -10,14 +10,25 @@ import UIKit
 
 class PageCell: UICollectionViewCell{
     
-    let appleImage: UIImageView = {
+    var page: Page? {
+        didSet{
+            guard let unerappedPage = page else {return}
+            appleImage.image = UIImage(named: unerappedPage.imageName)
+            let attributedText = NSMutableAttributedString(string: unerappedPage.headerText, attributes: [NSAttributedStringKey.font:UIFont.boldSystemFont(ofSize: 20)])
+            attributedText.append(NSAttributedString(string: "\n\n\n\(unerappedPage.subText)", attributes: [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor:UIColor.gray]))
+            descriptionTextView.attributedText = attributedText
+            descriptionTextView.textAlignment = .center
+        }
+    }
+    
+    private let appleImage: UIImageView = {
         let image = UIImageView(image: #imageLiteral(resourceName: "apple"))
         image.translatesAutoresizingMaskIntoConstraints = false;
         image.contentMode = .scaleAspectFit
         return image
     }()
     
-    let descriptionTextView: UITextView = {
+    private let descriptionTextView: UITextView = {
         let textview = UITextView()
         let attributedText = NSMutableAttributedString(string: "Steve Jobs", attributes: [NSAttributedStringKey.font:UIFont.boldSystemFont(ofSize: 20)])
         attributedText.append(NSAttributedString(string: "\n\n\nFounded the Apple company and invented the iphone. He got kicked out of his own company!", attributes: [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor:UIColor.gray]))
