@@ -10,19 +10,85 @@ import UIKit
 
 
 class SwipingController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
-    let pages = [Page(imageName: "apple", headerText: "Steve Jobs", subText: "Created Apple and teh iphone. Got kicked outta his own company"),
-                 Page(imageName: "windows", headerText: "Bill Gates", subText: "Created the largest company in the world"),
-                 Page(imageName: "android", headerText: "Google", subText: "The most selling moile device OS"),
-                 Page(imageName: "spotify", headerText: "Shannen", subText: "Will do great things in this world!" )
+    
+    let pages = [
+             Page(imageName: "apple", headerText: "Steve Jobs", subText: "Created Apple and teh iphone. Got kicked outta his own company"),
+             Page(imageName: "windows", headerText: "Bill Gates", subText: "Created the largest company in the world"),
+             Page(imageName: "android", headerText: "Google", subText: "The most selling moile device OS"),
+             Page(imageName: "spotify", headerText: "Shannen", subText: "Will do great things in this world!" )
     ]
     
-//    let imageName = ["apple",  "windows", "android", "spotify"]
-//    let headerStrings = ["Steve Jobs", "Bill Gates", "Google", "Shannen Bravo" ]
+    private lazy var pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.numberOfPages = pages.count
+        pc.currentPageIndicatorTintColor = .red
+        pc.pageIndicatorTintColor = .gray
+        return pc
+        
+    }()
+    
+    private let prevButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Prev", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
+        button.addTarget(self, action: #selector(handlePrev), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc private func handlePrev(){
+        
+        let nextIndex = max(pageControl.currentPage - 1, 0)
+        let indexPath = IndexPath(item: nextIndex, section: 0)
+        pageControl.currentPage = nextIndex
+        collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+    
+    private let nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Next", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
+        button.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc private func handleNext(){
+        
+        let nextIndex = min(pageControl.currentPage + 1, pages.count - 1)
+        let indexPath = IndexPath(item: nextIndex, section: 0)
+        pageControl.currentPage = nextIndex
+        collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+    fileprivate func setupButtomControls() {
+        let bottomControls = UIStackView(arrangedSubviews: [prevButton,pageControl,nextButton])
+        bottomControls.translatesAutoresizingMaskIntoConstraints = false
+        bottomControls.distribution = .fillEqually
+        view.addSubview(bottomControls)
+        bottomControls.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        bottomControls.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        bottomControls.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        bottomControls.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        
+    }
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let x = targetContentOffset.pointee.x
+        pageControl.currentPage = Int(x / view.frame.width) 
+    }
     override func viewDidLoad(){
         super.viewDidLoad()
+        setupButtomControls()
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.isPagingEnabled = true
+        
         
     }
     

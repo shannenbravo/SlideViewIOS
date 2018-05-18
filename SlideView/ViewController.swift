@@ -67,8 +67,6 @@ class ViewController: UIViewController {
     }
     
     fileprivate func setupButtomControls() {
-//        view.addSubview(prevButton)
-//        prevButton.backgroundColor = .red
         let bottomControls = UIStackView(arrangedSubviews: [prevButton,pageControl,nextButton])
         bottomControls.translatesAutoresizingMaskIntoConstraints = false
         bottomControls.distribution = .fillEqually
